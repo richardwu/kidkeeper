@@ -5,6 +5,8 @@
 char ssid[] = "uw-event";          //  your network SSID (name) 
 char pass[] = "uwhackathon";   // your network password
 
+char edison_token[] = "iLOVEtechRETREAT";
+
 int status = WL_IDLE_STATUS;
 IPAddress server(10,21,176,88);  // Local server
 
@@ -31,7 +33,7 @@ void setup() {
 
 void loop() {
   
-  char params[100];
+  char params[200];
   float temp = 20;
   float latitude = 10;
   float longitude = 10;
@@ -40,7 +42,7 @@ void loop() {
   int sound = 0;
   int humidity = 0;
   
-  sprintf(params, "POST /telemetries?temp=%f&latitude=%f&longitude=%f&air_quality=%d&light=%d&sound=%d&humidity=%d HTTP/1.1", temp, latitude, longitude, air_quality, light, sound, humidity);
+  sprintf(params, "POST /telemetries?edison_token=%s&temp=%f&latitude=%f&longitude=%f&air_quality=%d&light=%d&sound=%d&humidity=%d HTTP/1.1", edison_token, temp, latitude, longitude, air_quality, light, sound, humidity);
  
   
   if (client.connect(server, 80)) {
