@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815155911) do
+ActiveRecord::Schema.define(version: 20150815182036) do
 
   create_table "telemetries", force: :cascade do |t|
     t.float    "temp"
@@ -22,7 +22,11 @@ ActiveRecord::Schema.define(version: 20150815155911) do
     t.integer  "air_quality"
     t.integer  "light"
     t.integer  "sound"
+    t.integer  "humidity"
+    t.integer  "user_id"
   end
+
+  add_index "telemetries", ["user_id"], name: "index_telemetries_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

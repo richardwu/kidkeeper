@@ -49,7 +49,6 @@ void loop() {
       client.println(params);
       client.println("Host: 10.21.176.88");
       client.println("Content-Type: application/json");
-      client.println("Content-Type: application/json");
       client.println("Content-Length: ");
       client.println();
       client.stop();

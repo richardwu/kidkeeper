@@ -8,6 +8,20 @@ else
 	json.temp @telemetry.temp.to_s + '°C' 
 end
 
+if @telemetry.temp >= 40
+	json.temp_str = 'Very high'
+elsif @telemetry.temp >= 30
+	json.temp_str = 'High'
+elsif @telemetry.temp >= 20
+	json.temp_str 'Normal'
+elsif @telemetry.temp >= 10
+	json.temp_str 'Low'
+elsif @telemetry.temp >= 0 
+	json.temp_str 'Very low'
+else
+	json.temp_str 'Freezing'
+end
+
 case @telemetry.air_quality
 when 0
 	json.air_quality 'Clean'
@@ -44,4 +58,17 @@ when 3
 else 
 	json.sound 'NoData'
 end
+
+
+case @telemetry.humidity
+when 0
+	json.humidity 'High'
+when 1
+	json.humidity 'Normal'
+when 2
+	json.humidity 'Low'
+else 
+	json.humidity 'NoData'
+end
+
 
