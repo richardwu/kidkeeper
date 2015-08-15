@@ -15,7 +15,7 @@
 {
     self = [super init];
     if (self) {
-        _sensors = @[@[@"GPS",@"20 seconds ago"],@[@"Temperature",@"20 °C"],@[@"Air Quality",@"Clean"],@[@"Light",@"Dark"],@[@"Sound",@"Quite"]];
+        _sensors = [NSMutableArray arrayWithArray:@[@[@"GPS",@" ",@"n"],@[@"Temperature",@"",@"n"],@[@"Air Quality",@"",@"n"],@[@"Brightness",@"",@"n"],@[@"Sound",@"",@"n"]]] ;
     }
     return self;
 }
@@ -25,6 +25,15 @@
     if (cell) {
         cell.sensorName = _sensors[indexPath.row][0];
         cell.sensorData = _sensors[indexPath.row][1];
+        if ([_sensors[indexPath.row][2] isEqualToString:@"n"]) {
+            cell.valueStatus = KEValueNormal;
+        }
+        if ([_sensors[indexPath.row][2] isEqualToString:@"d"]) {
+            cell.valueStatus = KEValueDanger;
+        }
+        if ([_sensors[indexPath.row][2] isEqualToString:@"w"]) {
+            cell.valueStatus = KEValueWarning;
+        }
     }
     return cell;
 }

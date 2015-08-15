@@ -7,9 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "KETableView.h"
+#import "KEStatusDataSource.h"
 
 @interface ViewController : UIViewController
 
 
+- (IBAction)refresh:(id)sender;
+@property(nonatomic) NSInteger teleID;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property(nonatomic) BOOL loading;
+@property(nonatomic) MKPointAnnotation* annotation;
+@property(nonatomic) KETableView* tableView;
+@property(nonatomic) KEStatusDataSource* statusDataSource;
+@property(nonatomic) NSURL* serverURL;
 @end
 
