@@ -15,7 +15,7 @@
 {
     self = [super init];
     if (self) {
-        _sensors = @[@[@"GPS",@"20 seconds ago"],@[@"Temperature",@"20 °C"],@[@"Air Quality",@"Clean"],@[@"Light",@"Dark"],@[@"Sound",@"Quite"]];
+        _sensors = [NSMutableArray arrayWithArray:@[@[@"GPS",@" "],@[@"Temperature",@""],@[@"Air Quality",@""],@[@"Brightness",@""],@[@"Sound",@""]]] ;
     }
     return self;
 }

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface KEStatusDataSource : NSObject<UITableViewDataSource>
-@property NSArray* sensors;
+@property NSMutableArray* sensors;
 
 @end

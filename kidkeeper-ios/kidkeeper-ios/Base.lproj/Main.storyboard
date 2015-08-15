@@ -21,10 +21,10 @@
             </objects>
             <point key="canvasLocation" x="-1406" y="484"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="YAF-8R-fpy">
             <objects>
-                <viewController id="p3v-ub-UnX" sceneMemberID="viewController">
+                <viewController id="p3v-ub-UnX" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LJN-xk-5Iy"/>
                         <viewControllerLayoutGuide type="bottom" id="2Wr-Cb-aSK"/>
@@ -63,6 +63,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="login" id="BHG-Ib-Jhe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,17 +87,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="AHg-bq-Lv4"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" id="xHI-mZ-wNU"/>
+                        <outlet property="emailField" destination="blX-EK-HXP" id="1Ga-CW-SiN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I5c-2U-Wvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-758" y="484"/>
         </scene>
-        <!--View Controller-->
+        <!--Kid-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController title="Kid" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -115,7 +118,16 @@
                             <constraint firstItem="aEQ-mo-kkz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="k9N-Ao-RGX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="NPf-7e-eyg"/>
+                    <navigationItem key="navigationItem" id="NPf-7e-eyg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="jKU-Ki-yFG">
+                            <connections>
+                                <action selector="refresh:" destination="BYZ-38-t0r" id="6iX-Do-AAK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="aEQ-mo-kkz" id="jkw-VG-N2n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
