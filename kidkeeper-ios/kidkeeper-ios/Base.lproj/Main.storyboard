@@ -33,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test3@email.com" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="blX-EK-HXP">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="kidkeeper@email.com" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="blX-EK-HXP">
                                 <rect key="frame" x="132" y="191" width="432" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
@@ -138,13 +138,7 @@
                             <constraint firstItem="aEQ-mo-kkz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="k9N-Ao-RGX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="NPf-7e-eyg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="jKU-Ki-yFG">
-                            <connections>
-                                <action selector="refresh:" destination="BYZ-38-t0r" id="6iX-Do-AAK"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="NPf-7e-eyg"/>
                     <connections>
                         <outlet property="mapView" destination="aEQ-mo-kkz" id="jkw-VG-N2n"/>
                     </connections>
