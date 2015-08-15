@@ -1,4 +1,6 @@
-
+<% if devise_controller? %>
+<%= devise_error_messages! %>
+<% end %>
 
 <% flash.each do |key, value| %>
 <div class="alert alert-<%= key %>">
