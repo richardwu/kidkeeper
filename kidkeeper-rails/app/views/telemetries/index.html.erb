@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Telemetries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @telemetries.each do |telemetry| %>
+      <tr>
+        <td><%= link_to 'Show', telemetry %></td>
+        <td><%= link_to 'Edit', edit_telemetry_path(telemetry) %></td>
+        <td><%= link_to 'Destroy', telemetry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Telemetry', new_telemetry_path %>
