@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KETableViewCell : UITableViewCell
+typedef NS_ENUM(NSUInteger, KESensorValueStatus){
+    KEValueNormal,
+    KEValueWarning,
+    KEValueDanger
+};
 
+@interface KETableViewCell : UITableViewCell
+@property(nonatomic) KESensorValueStatus valueStatus;
+@property(nonatomic) NSString* sensorName;
+@property(nonatomic) NSString* sensorData;
 @end

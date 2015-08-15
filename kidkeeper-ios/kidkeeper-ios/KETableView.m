@@ -10,16 +10,19 @@
 
 @implementation KETableView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame style:style];
     if (self) {
-        UIVisualEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        UIVisualEffectView* blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        self.backgroundView = blurView;
-        self.backgroundColor = [UIColor clearColor];
         
-        self.separatorEffect = [UIVibrancyEffect effectForBlurEffect:blurView];
+        if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+            UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+            UIVisualEffectView* blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+            self.backgroundView = blurView;
+            self.backgroundColor = [UIColor clearColor];
+            
+            self.separatorEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+        }
     }
     return self;
 }
