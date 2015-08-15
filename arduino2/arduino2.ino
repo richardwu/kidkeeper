@@ -25,7 +25,11 @@ void setup() {
   else {
     Serial.println("Connected to wifi");
     Serial.println("\nStarting connection...");
-    // if you get a connection, report back via serial:
+  }
+}
+
+void loop() {
+ 
     if (client.connect(server, 80)) {
       Serial.println("connected");
       // Make a HTTP request:
@@ -35,10 +39,8 @@ void setup() {
       client.println("Content-Type: application/json");
       client.println("Content-Length: ");
       client.println();
+      client.stop();
     }
-  }
-}
-
-void loop() {
-
+   
+   delay(5000);
 }
