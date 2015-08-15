@@ -10,10 +10,16 @@
 #import "ViewController.h"
 
 @interface LoginViewController ()
+- (IBAction)tryLogin:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField *urlField;
 
 @end
 
-@implementation LoginViewController
+@implementation LoginViewController{
+    NSURLSession* _session;
+    NSURL* _url;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,7 +34,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"login"]) {
         ViewController* vc = (ViewController*)[segue destinationViewController];
-        vc.teleID = [self.emailField.text integerValue];
+        vc.teleID = 404;
+        vc.serverURL = _url;
     }
 }
 
@@ -42,4 +49,38 @@
 }
 */
 
+- (NSURLSession*)session{
+    if (!_session) {
+        NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _session = [NSURLSession sessionWithConfiguration:sessionConfig];
+    }
+    return _session;
+}
+
+- (IBAction)tryLogin:(id)sender {
+    if (!_loging) {
+        _loging = YES;
+        __weak LoginViewController* wee = self;
+        _url = [NSURL URLWithString:self.urlField.text];
+        NSString *post = [NSString stringWithFormat:@"user[email]=%@&user[password]=%@",self.emailField.text,self.passwordField.text];
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[_url URLByAppendingPathComponent:@"users/sign_in.json"]];
+        request.HTTPMethod = @"POST";
+        request.HTTPBody = [post dataUsingEncoding:NSUTF8StringEncoding];
+        NSURLSessionDataTask* task =  [[self session] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSHTTPURLResponse* http = (NSHTTPURLResponse*)response;
+            if (http.statusCode == 200){
+                NSString* status = (NSString*) [(NSDictionary*)[NSJSONSerialization JSONObjectWithData:data options:0 error:nil] objectForKey:@"status"];
+                if ([status isEqualToString:@"success"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [wee performSegueWithIdentifier:@"login" sender:wee];
+                    });
+                }
+                
+            }
+            wee.loging = NO;
+        }];
+        [task resume];
+    }
+    
+}
 @end

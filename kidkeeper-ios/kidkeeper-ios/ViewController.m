@@ -18,7 +18,6 @@
 @implementation ViewController{
     
     NSURLSession* _urlSession;
-    NSURL* _serverURL;
 }
 
 - (void)viewDidLoad {
@@ -37,7 +36,6 @@
     
     NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     _urlSession = [NSURLSession sessionWithConfiguration:sessionConfig];
-    _serverURL = [NSURL URLWithString:@"http://10.21.176.88"];
     _loading = NO;
     [self refresh:nil];
 }
@@ -75,13 +73,24 @@
                     }
                     weakSelf.annotation.coordinate = cood;
                     
-                    weakSelf.statusDataSource.sensors[0] = @[@"GPS",[NSString stringWithFormat:@"Lat:%.2f, Long: %.2f",cood.latitude,cood.longitude]];
+                    weakSelf.statusDataSource.sensors[0] = @[@"GPS",[NSString stringWithFormat:@"Lat:%.2f, Long: %.2f",cood.latitude,cood.longitude],@"n"];
+                    /*
+                    NSString* air_quality;
+                    if (dict[@"air_quality"])*/
+                    weakSelf.statusDataSource.sensors[2] = @[@"Air Quality",dict[@"air_quality"],@"n"];
                     
-                    weakSelf.statusDataSource.sensors[1] = @[@"Temperature",dict[@"temp"]];
                     
-                    weakSelf.statusDataSource.sensors[2] = @[@"Air Quality",dict[@"air_quality"]];
+                    weakSelf.statusDataSource.sensors[3] = @[@"Brightness",dict[@"light"],@"n"];
                     
-                    weakSelf.statusDataSource.sensors[3] = @[@"Sound",dict[@"sound"]];
+                    weakSelf.statusDataSource.sensors[4] = @[@"Sound",dict[@"sound"],@"n"];
+                    
+                    if ([dict[@"temp_str"] containsString:@"Normal"] || [dict[@"temp_str"] containsString:@"NoData"]) {
+                        weakSelf.statusDataSource.sensors[1] = @[@"Temperature",dict[@"temp"],@"n"];
+                    } else if ([dict[@"temp_str"] containsString:@"Very"] || [dict[@"temp_str"] containsString:@"Freezing"]) {
+                        weakSelf.statusDataSource.sensors[1] = @[@"Temperature",dict[@"temp"],@"d"];
+                    } else if ([dict[@"temp_str"] containsString:@"High"] || [dict[@"temp_str"] containsString:@"Low"]) {
+                        weakSelf.statusDataSource.sensors[1] = @[@"Temperature",dict[@"temp"],@"w"];
+                    }
                     
                     [weakSelf.tableView reloadData];
                     //cll

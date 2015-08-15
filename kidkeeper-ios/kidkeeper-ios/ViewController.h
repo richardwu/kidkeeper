@@ -21,5 +21,6 @@
 @property(nonatomic) MKPointAnnotation* annotation;
 @property(nonatomic) KETableView* tableView;
 @property(nonatomic) KEStatusDataSource* statusDataSource;
+@property(nonatomic) NSURL* serverURL;
 @end
 

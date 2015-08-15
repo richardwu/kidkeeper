@@ -10,5 +10,5 @@
 
 @interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
-
+@property (nonatomic) BOOL loging;
 @end
