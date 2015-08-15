@@ -69,6 +69,6 @@ class TelemetriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def telemetry_params
-      params[:telemetry]
+      params.permit(:temp, :co_level, :meth_level, :longitude, :latitude)
     end
 end
