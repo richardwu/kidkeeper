@@ -38,11 +38,16 @@
     _urlSession = [NSURLSession sessionWithConfiguration:sessionConfig];
     _loading = NO;
     [self refresh:nil];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(reloadData) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)reloadData{
+    [self refresh:nil];
 }
 
 - (IBAction)refresh:(id)sender {
@@ -52,37 +57,67 @@
         NSURLSessionDataTask* task = [_urlSession dataTaskWithURL:[_serverURL URLByAppendingPathComponent:[NSString stringWithFormat:@"telemetries/%ld.json",(long)_teleID]] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             NSHTTPURLResponse* http = (NSHTTPURLResponse*) response;
             NSError* err;
-            NSLog(@"%ld",(long)http.statusCode);
             if (http.statusCode == 200) {
                 NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
-                NSLog(@"Lon:%@,Lat:%@",dict[@"longitude"],dict[@"latitude"]);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     CLLocationCoordinate2D cood = CLLocationCoordinate2DMake([(NSNumber*)dict[@"latitude"] doubleValue],[(NSNumber*)dict[@"longitude"] doubleValue]);
-                    CLLocationCoordinate2D f_cood = CLLocationCoordinate2DMake([(NSNumber*)dict[@"latitude"] doubleValue],[(NSNumber*)dict[@"longitude"] doubleValue]);
-                    if (f_cood.latitude > 0) {
-                        f_cood.latitude -= 0.005;
-                    }else{
-                        f_cood.latitude -= 0.005;
+                    
+                    BOOL flag = YES;
+                    
+                    if (weakSelf.annotation) {
+                        MKMapPoint point1 = MKMapPointForCoordinate(cood);
+                        MKMapPoint point2 = MKMapPointForCoordinate(weakSelf.annotation.coordinate);
+                        CLLocationDistance distance = MKMetersBetweenMapPoints(point1, point2);
+                        if (distance < 200){
+                            flag = NO;
+                        }
                     }
-                    MKCoordinateRegion region = [weakSelf.mapView regionThatFits:MKCoordinateRegionMakeWithDistance(f_cood, 2000, 2000)];
-                    [weakSelf.mapView setRegion:region];
-                    [weakSelf.mapView removeAnnotations:weakSelf.mapView.annotations];
-                    if (!weakSelf.annotation) {
-                        weakSelf.annotation = [[MKPointAnnotation alloc] init];
-                        [weakSelf.mapView addAnnotation:weakSelf.annotation];
+                    
+                    if (flag) {
+                        NSLog(@"NEW");
+                        CLLocationCoordinate2D f_cood = CLLocationCoordinate2DMake([(NSNumber*)dict[@"latitude"] doubleValue],[(NSNumber*)dict[@"longitude"] doubleValue]);
+                        if (f_cood.latitude > 0) {
+                            f_cood.latitude -= 0.005;
+                        }else{
+                            f_cood.latitude -= 0.005;
+                        }
+                        MKCoordinateRegion region = [weakSelf.mapView regionThatFits:MKCoordinateRegionMakeWithDistance(f_cood, 2000, 2000)];
+                        [weakSelf.mapView setRegion:region];
+                        if (!weakSelf.annotation) {
+                            weakSelf.annotation = [[MKPointAnnotation alloc] init];
+                            [weakSelf.mapView addAnnotation:weakSelf.annotation];
+                        }
+                        weakSelf.annotation.coordinate = cood;
                     }
-                    weakSelf.annotation.coordinate = cood;
+                    
                     
                     weakSelf.statusDataSource.sensors[0] = @[@"GPS",[NSString stringWithFormat:@"Lat:%.2f, Long: %.2f",cood.latitude,cood.longitude],@"n"];
-                    /*
+                    
                     NSString* air_quality;
-                    if (dict[@"air_quality"])*/
-                    weakSelf.statusDataSource.sensors[2] = @[@"Air Quality",dict[@"air_quality"],@"n"];
+                    if ([dict[@"air_quality"] containsString:@"High"] || [dict[@"air_quality"] containsString:@"Alert"]){
+                        air_quality = @"d";
+                    } else if ([dict[@"air_quality"] containsString:@"Low"]){
+                        air_quality = @"w";
+                    } else {
+                        air_quality = @"n";
+                    }
+                    weakSelf.statusDataSource.sensors[2] = @[@"Air Quality",dict[@"air_quality"],air_quality];
+                    
+                    if ([dict[@"light"] isEqualToString:@"Dark"] || [dict[@"light"] isEqualToString:@"Bright"]) {
+                        weakSelf.statusDataSource.sensors[3] = @[@"Brightness",dict[@"light"],@"w"];
+                    } else {
+                        weakSelf.statusDataSource.sensors[3] = @[@"Brightness",dict[@"light"],@"n"];
+                    }
+                    
+                    if ([dict[@"sound"] containsString:@"Little"]) {
+                        weakSelf.statusDataSource.sensors[4] = @[@"Sound",dict[@"sound"],@"w"];
+                    } else if ([dict[@"sound"] containsString:@"High"] || [dict[@"sound"] containsString:@"Noisy"]) {
+                        weakSelf.statusDataSource.sensors[4] = @[@"Sound",dict[@"sound"],@"d"];
+                    } else {
+                        weakSelf.statusDataSource.sensors[4] = @[@"Sound",dict[@"sound"],@"n"];
+                    }
                     
                     
-                    weakSelf.statusDataSource.sensors[3] = @[@"Brightness",dict[@"light"],@"n"];
-                    
-                    weakSelf.statusDataSource.sensors[4] = @[@"Sound",dict[@"sound"],@"n"];
                     
                     if ([dict[@"temp_str"] containsString:@"Normal"] || [dict[@"temp_str"] containsString:@"NoData"]) {
                         weakSelf.statusDataSource.sensors[1] = @[@"Temperature",dict[@"temp"],@"n"];
