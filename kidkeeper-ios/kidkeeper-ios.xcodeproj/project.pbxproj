@@ -15,6 +15,7 @@
 		968193711B7F7ADB00867649 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9681936F1B7F7ADB00867649 /* LaunchScreen.xib */; };
 		9681937D1B7F7ADB00867649 /* kidkeeper_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9681937C1B7F7ADB00867649 /* kidkeeper_iosTests.m */; };
 		968193881B7F7BF400867649 /* KETableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 968193871B7F7BF400867649 /* KETableView.m */; };
+		9681938B1B7F7E2400867649 /* KETableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9681938A1B7F7E2400867649 /* KETableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		9681937C1B7F7ADB00867649 /* kidkeeper_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = kidkeeper_iosTests.m; sourceTree = "<group>"; };
 		968193861B7F7BF400867649 /* KETableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KETableView.h; sourceTree = "<group>"; };
 		968193871B7F7BF400867649 /* KETableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KETableView.m; sourceTree = "<group>"; };
+		968193891B7F7E2400867649 /* KETableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KETableViewCell.h; sourceTree = "<group>"; };
+		9681938A1B7F7E2400867649 /* KETableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KETableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 				9681936A1B7F7ADB00867649 /* Main.storyboard */,
 				968193861B7F7BF400867649 /* KETableView.h */,
 				968193871B7F7BF400867649 /* KETableView.m */,
+				968193891B7F7E2400867649 /* KETableViewCell.h */,
+				9681938A1B7F7E2400867649 /* KETableViewCell.m */,
 				9681936D1B7F7ADB00867649 /* Images.xcassets */,
 				9681936F1B7F7ADB00867649 /* LaunchScreen.xib */,
 				968193601B7F7ADB00867649 /* Supporting Files */,
@@ -226,6 +231,7 @@
 			files = (
 				968193691B7F7ADB00867649 /* ViewController.m in Sources */,
 				968193661B7F7ADB00867649 /* AppDelegate.m in Sources */,
+				9681938B1B7F7E2400867649 /* KETableViewCell.m in Sources */,
 				968193631B7F7ADB00867649 /* main.m in Sources */,
 				968193881B7F7BF400867649 /* KETableView.m in Sources */,
 			);
