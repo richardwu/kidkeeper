@@ -1,5 +1,6 @@
 #include <SPI.h>
 #include <WiFi.h>
+#include <stdio.h>
 
 char ssid[] = "uw-event";          //  your network SSID (name) 
 char pass[] = "uwhackathon";   // your network password
@@ -29,11 +30,23 @@ void setup() {
 }
 
 void loop() {
+  
+  char params[100];
+  float temp = 20;
+  float latitude = 10;
+  float longitude = 10;
+  int air_quality = 0;
+  int light = 0;
+  int sound = 0;
+  int humidity = 0;
+  
+  sprintf(params, "POST /telemetries?temp=%f&latitude=%f&longitude=%f&air_quality=%d&light=%d&sound=%d&humidity=%d HTTP/1.1", temp, latitude, longitude, air_quality, light, sound, humidity);
  
-    if (client.connect(server, 80)) {
+  
+  if (client.connect(server, 80)) {
       Serial.println("connected");
       // Make a HTTP request:
-      client.println("POST /telemetries?temp=20&air_quality=1 HTTP/1.1");
+      client.println(params);
       client.println("Host: 10.21.176.88");
       client.println("Content-Type: application/json");
       client.println("Content-Type: application/json");
