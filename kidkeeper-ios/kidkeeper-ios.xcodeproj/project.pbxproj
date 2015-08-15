@@ -16,6 +16,8 @@
 		9681937D1B7F7ADB00867649 /* kidkeeper_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9681937C1B7F7ADB00867649 /* kidkeeper_iosTests.m */; };
 		968193881B7F7BF400867649 /* KETableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 968193871B7F7BF400867649 /* KETableView.m */; };
 		9681938B1B7F7E2400867649 /* KETableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9681938A1B7F7E2400867649 /* KETableViewCell.m */; };
+		9681938D1B7F856300867649 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9681938C1B7F856300867649 /* MapKit.framework */; };
+		968193901B7F8B4700867649 /* KEStatusDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9681938F1B7F8B4700867649 /* KEStatusDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,9 @@
 		968193871B7F7BF400867649 /* KETableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KETableView.m; sourceTree = "<group>"; };
 		968193891B7F7E2400867649 /* KETableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KETableViewCell.h; sourceTree = "<group>"; };
 		9681938A1B7F7E2400867649 /* KETableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KETableViewCell.m; sourceTree = "<group>"; };
+		9681938C1B7F856300867649 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9681938E1B7F8B4700867649 /* KEStatusDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KEStatusDataSource.h; sourceTree = "<group>"; };
+		9681938F1B7F8B4700867649 /* KEStatusDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KEStatusDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9681938D1B7F856300867649 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +75,7 @@
 		968193541B7F7ADA00867649 = {
 			isa = PBXGroup;
 			children = (
+				9681938C1B7F856300867649 /* MapKit.framework */,
 				9681935F1B7F7ADB00867649 /* kidkeeper-ios */,
 				968193791B7F7ADB00867649 /* kidkeeper-iosTests */,
 				9681935E1B7F7ADB00867649 /* Products */,
@@ -91,6 +98,8 @@
 				968193651B7F7ADB00867649 /* AppDelegate.m */,
 				968193671B7F7ADB00867649 /* ViewController.h */,
 				968193681B7F7ADB00867649 /* ViewController.m */,
+				9681938E1B7F8B4700867649 /* KEStatusDataSource.h */,
+				9681938F1B7F8B4700867649 /* KEStatusDataSource.m */,
 				9681936A1B7F7ADB00867649 /* Main.storyboard */,
 				968193861B7F7BF400867649 /* KETableView.h */,
 				968193871B7F7BF400867649 /* KETableView.m */,
@@ -229,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				968193901B7F8B4700867649 /* KEStatusDataSource.m in Sources */,
 				968193691B7F7ADB00867649 /* ViewController.m in Sources */,
 				968193661B7F7ADB00867649 /* AppDelegate.m in Sources */,
 				9681938B1B7F7E2400867649 /* KETableViewCell.m in Sources */,
@@ -430,6 +440,7 @@
 				968193821B7F7ADB00867649 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		968193831B7F7ADB00867649 /* Build configuration list for PBXNativeTarget "kidkeeper-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -438,6 +449,7 @@
 				968193851B7F7ADB00867649 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
