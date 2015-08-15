@@ -8,7 +8,9 @@ else
 	json.temp @telemetry.temp.to_s + '°C' 
 end
 
-if @telemetry.temp >= 40
+if @telemetry.temp.nil?
+	json.temp_str = 'NoData'
+elsif @telemetry.temp >= 40
 	json.temp_str = 'Very high'
 elsif @telemetry.temp >= 30
 	json.temp_str = 'High'

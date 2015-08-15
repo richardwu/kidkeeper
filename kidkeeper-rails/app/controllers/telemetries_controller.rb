@@ -1,5 +1,8 @@
 class TelemetriesController < ApplicationController
-  before_action :set_telemetry, only: [:show, :edit, :update, :destroy]
+
+  before_action :authenticate_user!, except: [:update]
+
+  before_action :find_telemetry, only: [:update, :destroy]
 
   # GET /telemetries
   # GET /telemetries.json
@@ -10,6 +13,13 @@ class TelemetriesController < ApplicationController
   # GET /telemetries/1
   # GET /telemetries/1.json
   def show
+    @user = current_user 
+    if @user.telemetry.nil?
+      @telemetry = @user.build_telemetry
+      @telemetry.save
+    else
+      @telemetry = @user.telemetry
+    end
   end
 
   # GET /telemetries/new
@@ -24,7 +34,8 @@ class TelemetriesController < ApplicationController
   # POST /telemetries
   # POST /telemetries.json
   def create
-    @telemetry = Telemetry.new(telemetry_params)
+    @user = User.where(edison_token: params[:edison_token]).first
+    @telemetry = @user.build_telemetry(telemetry_params)
 
     respond_to do |format|
       if @telemetry.save
@@ -62,13 +73,19 @@ class TelemetriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_telemetry
-      @telemetry = Telemetry.find(params[:id])
+
+  def find_telemetry
+    @user = User.where(edison_token: params[:edison_token]).first
+    if @user.telemetry.nil?
+      @telemetry = @user.build_telemetry
+      @telemetry.save
+    else
+      @telemetry = @user.telemetry
     end
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def telemetry_params
-      params.permit(:temp, :air_quality, :light, :sound, :longitude, :latitude)
+      params.permit(:temp, :air_quality, :light, :sound, :humidity, :longitude, :latitude)
     end
-end
+  end

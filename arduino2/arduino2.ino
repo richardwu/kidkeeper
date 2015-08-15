@@ -1,4 +1,4 @@
-#include <SPI.h>
+  #include <SPI.h>
 #include <WiFi.h>
 #include <stdio.h>
 
@@ -34,15 +34,15 @@ void setup() {
 void loop() {
   
   char params[200];
-  float temp = 20;
-  float latitude = 10;
-  float longitude = 10;
-  int air_quality = 0;
-  int light = 0;
-  int sound = 0;
-  int humidity = 0;
+  float temp = 10;
+  float latitude = 30;
+  float longitude = 30;
+  int air_quality = 2;
+  int light = 1;
+  int sound = 4;
+  int humidity = 2;
   
-  sprintf(params, "POST /telemetries?edison_token=%s&temp=%f&latitude=%f&longitude=%f&air_quality=%d&light=%d&sound=%d&humidity=%d HTTP/1.1", edison_token, temp, latitude, longitude, air_quality, light, sound, humidity);
+  sprintf(params, "PUT /telemetries/1?edison_token=%s&temp=%f&latitude=%f&longitude=%f&air_quality=%d&light=%d&sound=%d&humidity=%d HTTP/1.1", edison_token, temp, latitude, longitude, air_quality, light, sound, humidity);
  
   
   if (client.connect(server, 80)) {
