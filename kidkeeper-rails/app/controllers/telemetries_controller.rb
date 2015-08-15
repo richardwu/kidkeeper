@@ -22,7 +22,7 @@ class TelemetriesController < ApplicationController
     end
 
     gon.telemetryId = @telemetry.id
-  end
+   end
 
   # GET /telemetries/new
   def new
@@ -53,16 +53,16 @@ class TelemetriesController < ApplicationController
   # PATCH/PUT /telemetries/1
   # PATCH/PUT /telemetries/1.json
   def update
-    respond_to do |format|
-      if @telemetry.update(telemetry_params)
-        format.html { redirect_to @telemetry, notice: 'Telemetry was successfully updated.' }
-        format.json { render :show, status: :ok, location: @telemetry }
-      else
-        format.html { render :edit }
-        format.json { render json: @telemetry.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @telemetry.update(telemetry_params)
+          format.html { redirect_to @telemetry, notice: 'Telemetry was successfully updated.' }
+          format.json { render :show, status: :ok, location: @telemetry }
+        else
+          format.html { render :edit }
+          format.json { render json: @telemetry.errors, status: :unprocessable_entity }
+        end
       end
     end
-  end
 
   # DELETE /telemetries/1
   # DELETE /telemetries/1.json
