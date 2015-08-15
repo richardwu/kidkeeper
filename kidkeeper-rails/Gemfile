@@ -32,6 +32,8 @@ gem 'devise'
 # Bootstrap layout CSS
 gem 'bootstrap-sass', '~> 3.3.5'
 
+#gon
+gem 'gon'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

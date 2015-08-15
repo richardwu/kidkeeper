@@ -9,11 +9,11 @@ else
 end
 
 if @telemetry.temp.nil?
-	json.temp_str = 'NoData'
+	json.temp_str 'NoData'
 elsif @telemetry.temp >= 40
-	json.temp_str = 'Very high'
+	json.temp_str 'Very high'
 elsif @telemetry.temp >= 30
-	json.temp_str = 'High'
+	json.temp_str 'High'
 elsif @telemetry.temp >= 20
 	json.temp_str 'Normal'
 elsif @telemetry.temp >= 10

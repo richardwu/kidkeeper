@@ -12,7 +12,7 @@
 
 			<!-- Logo redirects to dashboards instead of homepage when signed in -->
 			<% if user_signed_in? %>
-			<%= link_to 'KidKeeper', telemetries_path, class: 'navbar-brand' %>
+			<%= link_to 'KidKeeper', telemetry_path(current_user.telemetry), class: 'navbar-brand' %>
 			<% else %> 
 			<%= link_to 'KidKeeper', root_path, class: 'navbar-brand' %>
 			<% end %>
@@ -25,7 +25,7 @@
 			<!-- non-collapse navbar order -->
 			<ul class="nav navbar-nav navbar-right hidden-xs">
 				<% if user_signed_in? %>
-				<li><%= link_to current_user.email, telemetries_path %></li>
+				<li><%= link_to current_user.email,  telemetry_path(current_user.telemetry) %></li>
 				<li><%= link_to 'Sign Out', destroy_user_session_path, method: 'DELETE' %></li>
 				<% else %>
 				<li><%= link_to 'Sign Up', new_user_registration_path %></li>
@@ -37,7 +37,7 @@
 			<!-- collapsed navbar order -->
 			<ul class="nav navbar-nav navbar-right visible-xs">
 				<% if user_signed_in? %>
-				<li><%= link_to current_user.email, telemetries_path %></li>
+				<li><%= link_to current_user.email,  telemetry_path(current_user.telemetry) %></li>
 				<li><%= link_to 'Sign Out', destroy_user_session_path %></li>
 				<% else %>
 				<li><%= link_to 'Sign In', new_user_session_path %></li>

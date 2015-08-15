@@ -20,6 +20,8 @@ class TelemetriesController < ApplicationController
     else
       @telemetry = @user.telemetry
     end
+
+    gon.telemetryId = @telemetry.id
   end
 
   # GET /telemetries/new
